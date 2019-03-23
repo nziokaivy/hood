@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Business, Profile, Neighbourhood, News, Health, Authorities
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm
+from .forms import ProfileForm, NewsForm
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -59,3 +59,30 @@ def authorities(request):
     authorities = Authorities.objects.filter(neighbourhood_id=profile.neighbourhood)
 
     return render(request,'authorities.html',{"authorities":authorities})
+
+def news(request):
+    current_user=request.user
+    profile=Profile.objects.get(username=current_user)
+    news = News.objects.filter(neighbourhood_id=profile.neighbourhood)
+
+    return render(request,'news.html',{"news":news})
+
+def new_news(request):
+    current_user=request.user
+    profile =Profile.objects.get(username=current_user)
+
+    if request.method=="POST":
+        form =NewsForm(request.POST,request.FILES)
+        if form.is_valid():
+            news = form.save(commit = False)
+            news.author = current_user
+            news.neighbourhood_id = profile.neighbourhood
+            news.save()
+
+        return HttpResponseRedirect('/news')
+
+
+    else:
+        form = NewsForm()
+
+    return render(request,'news.html',{"form":form})

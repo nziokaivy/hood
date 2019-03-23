@@ -8,7 +8,7 @@ import datetime as dt
 
 # Create your models here.
 class Neighbourhood(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null = True)
     image = models.ImageField(upload_to='hoods/', null=True)
     neighbourhood_count= models.IntegerField(default=0, null=True, blank=True)
    
@@ -24,8 +24,8 @@ class Neighbourhood(models.Model):
 
 
 class News(models.Model):
-    title = models.CharField(max_length=100)
-    notification = HTMLField()
+    title = models.CharField(max_length=100, null = True)
+    note = models.CharField(max_length=1000, null = True)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     neighbourhood_id = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
@@ -35,7 +35,7 @@ class News(models.Model):
 
 
 class Healthservices(models.Model):
-    healthservices = models.CharField(max_length=100)
+    healthservices = models.CharField(max_length=100, null = True)
 
     def __str__(self):
         return self.healthservices
