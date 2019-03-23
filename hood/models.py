@@ -13,14 +13,14 @@ class Neighbourhood(models.Model):
     neighbourhood_count= models.IntegerField(default=0, null=True, blank=True)
    
     def __str__(self):
-        return self.neighbourhood
+        return self.name
 
     def save_neighbourhood(self):
         self.save()
 
     @classmethod
-    def delete_neighbourhood(cls,neighbourhood):
-        cls.objects.filter(neighbourhood=neighbourhood).delete()
+    def delete_neighbourhood(cls,Neighbourhood):
+        cls.objects.filter(Neighbourhood=Neighbourhood).delete()
 
 
 class News(models.Model):
@@ -51,13 +51,13 @@ class Healthservices(models.Model):
 class Business(models.Model):
     business_name = models.CharField(max_length=30, null=True)
     image = models.ImageField(upload_to='images/', null=True)
-    description = HTMLField()
+    description = models.CharField(max_length=1000, null = True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="business")
     neighbourhood_id = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE,related_name="neighbourhoodbusiness",null=True,blank=True)
     contact = models.IntegerField()
     business_email = models.CharField(max_length=200, null = True)
-    
-  
+    pub_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
 
     def __str__(self):
         return self.business_name
@@ -68,33 +68,32 @@ class Health(models.Model):
     neighbourhood_id = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE)
     email = models.EmailField()
     contact = models.IntegerField()
-    health_email = models.CharField(max_length=200, null = True)
-    healthservices = models.ManyToManyField(Healthservices)
+   
 
     def __str__(self):
-        return self.name
+        return self.health_name
 
 class Authorities(models.Model):
     authority_name =models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/', null=True)
-   
     neighbourhood_id = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE)
     email = models.EmailField()
     contact = models.IntegerField()
-    authority_email = models.CharField(max_length=200, null = True)
+
    
 
     def __str__(self):
-        return self.name
+        return self.authority_name
 
 
 class Profile(models.Model):
-    profile_photo = models.ImageField(upload_to='pics/')
-    bio = HTMLField()
-    neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE)
     username = models.ForeignKey(User,on_delete=models.CASCADE)
-    email = models.EmailField()
+    profile_photo = models.ImageField(upload_to='pics/')
+    bio = models.CharField(max_length=100)
+    neighbourhood = models.ForeignKey(Neighbourhood,on_delete=models.CASCADE)
+    email = models.EmailField(max_length=100)
 
-    def __str__(self):
-        return self.name
+    
 
+    def save_profile(self):
+        self.save()

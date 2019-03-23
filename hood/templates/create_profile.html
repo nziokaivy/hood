@@ -1,52 +1,68 @@
-
-{%extends "base.html"%}
+{% extends "registration/base.html" %}
 {% load bootstrap3 %}
-{%load static%} 
-{% load staticfiles %} 
+{% load static %}
+
 {% block content %}
+<div class="container">
+  <div class="row">
+    <!-- Empty div -->
+
+    <div class="col-md-4 phone-section">
+    </div>
 
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Edit Profile Information</title>
-  {{form.media}}
+    <div class="col-md-4 form-section">
+      {{form.media}}
 
-{% block styles %} 
-{% bootstrap_css %}
-  <link rel="stylesheet" href="{% static 'css/news.css' %}"> {% endblock %}
+    {% if form.errors %}
+        <p>Please enter correct value</p>
+      {% endif %}
 
-</head>
-{% include "base.html" %}
-{% include "navbar.html" %}
+      <div class="panel panel-default" style="margin-top:150px;">
 
-<body style="font-family: 'ABeeZee', sans-serif;">
-<div class="container" style="background-color:#fff;">
-  <br>
-<h1 style="font-family: 'ABeeZee', sans-serif; margin-right:0px;">Edit Profile Information</h1>
+        <div class="panel-body">
 
-     <div class="row">
+          <div class="text-center">
+            <h3>Create your profile</h3>
+          <form action="{% url 'create-profile' %}" method="post" enctype="multipart/form-data">
 
-  <br>
-  <form  action="{%url 'create_profile'%}" method="post" enctype="multipart/form-data" style="font-family: 'ABeeZee', sans-serif;">
-    {%csrf_token%}
+            {% csrf_token%}
+            {% bootstrap_form form %}
 
-    {% bootstrap_form form%}
-    <input id="id_myfield" type="submit" class="btn btn-info btn-lg" value="Post" style="font-family: 'ABeeZee', sans-serif;">
-  </form>
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary login-button" value="Post">
 
-   {% block scripts %}
+            </div>
+            <input type="hidden" name="next" value="/">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  {% bootstrap_javascript %} {% endblock %}
+          </form>
+        </div>
+        </div>
 
+    
 
-     </div>
+    </div>
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+  </div>
+
 </div>
 
-
-
-
-</body>
+<style>
+.panel{
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) fixed;
+}
+p, label,a{
+  color:white;
+  font-size: 15px;
+}
+.panel-default{
+  border-color: inherit;
+}
+input,h3{
+  text-align: center;
+  color: white;
+}
+</style>
 {% endblock %}

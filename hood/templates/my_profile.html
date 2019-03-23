@@ -27,16 +27,17 @@
 
  <div class="content-section" style="margin-left:30px;">
     <div class="media">
-    {% if user.profile.profile_image %}
-    <img src="{{user.profile.profile_photo.url}}" style="border-radius: 50%; width:250px;height:250px;" alt="image">
+    {% if profile.profile_photo %}
+    <img src="{{profile.profile_photo.url}}" style="border-radius: 50%; width:250px;height:250px;" alt="image">
     {% else %}
     <img src="/static/images/default.jpeg" style="border-radius: 50%; width:250px;height:250px;" alt="image">
     {%endif%}
     <div class="media-body">
-      <h2 class="account-heading" style=" font-family: 'ABeeZee', sans-serif;">{{ user.username }}</h2>
-      <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;">{{ user.email }}</p>
-      <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;">{{ user.profile.user_bio }}</p>
-      <a href="{% url 'edit_profile' %}" class="button">Edit Profile</a>
+      <h2 class="account-heading" style=" font-family: 'ABeeZee', sans-serif;"><strong>Username:</strong> {{ user.username }}</h2>
+      <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;"><strong>Email: </strong>{{ user.email }}</p>
+      <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;"><strong>Bio: </strong> {{ profile.bio }}</p>
+      <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;"><strong>Neighbourhood: </strong> {{ profile.neighbourhood}}</p>
+      <a href="#" class="button">Edit Profile</a>
     </div>
     </div>
     <form  action="/accounts/register/" method="post">
