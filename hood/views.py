@@ -53,3 +53,9 @@ def health(request):
 
     return render(request,'health.html',{"healthservices":healthservices})
 
+def authorities(request):
+    current_user=request.user
+    profile=Profile.objects.get(username=current_user)
+    authorities = Authorities.objects.filter(neighbourhood_id=profile.neighbourhood)
+
+    return render(request,'authorities.html',{"authorities":authorities})
