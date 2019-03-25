@@ -1,51 +1,74 @@
-
-{% extends 'base.html' %}
+{% extends "registration/base.html" %}
+{% load bootstrap3 %}
 {% load static %}
-{% load staticfiles %}
-
 
 {% block content %}
+<div class="w3-main w3-padding-large" style="margin-left:40%">
 
+<style>
+  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+</style>
 <div class="container">
   <div class="row">
-    <div class="col-md-12 top-div" style="margin-top:40px;"></div>
+    <!-- Empty div -->
+
+    <div class="col-md-4 phone-section">
+    </div>
+
+
+
+    <div class="col-md-4 form-section">
+  
+
+    {% if form.errors %}
+        <p>Please enter correct value</p>
+      {% endif %}
+
+      <div class="panel panel-default" style="margin-top:150px;">
+
+        <div class="panel-body">
+
+          <div class="text-center">
+            <h3>Add news</h3>
+          <form action="{% url 'new_news' %}" method="post" enctype="multipart/form-data">
+
+            {% csrf_token%}
+            {% bootstrap_form form %}
+
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary login-button" value="Post">
+
+            </div>
+            <input type="hidden" name="next" value="/">
+
+          </form>
+        </div>
+        </div>
+
+    
+
+    </div>
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
   </div>
 
-  <div class="text-center">
-    <a href="{% url 'new-blogpost' %}" >
-        <button class="btn btn-primary" style="height:50px;  margin-top: -6px;">Create BlogPost</button>
-    </a>
-  </div>
-
-  <div class="row">
-  {% for blog in blogposts %}
-  <div class="col-md-6">
-  <div class="card" style="width: 30rem;margin-top:10px;">
-  <div class="card-body">
-    <a href="/view/blog/{{blog.id}}" style="color:black;text-decoration:none;margin:auto;">
-      <h5 class="card-title">{{blog.title}}</h5>
-    </a>
-    <a href="/user/{{blog.username}}" style="color:black;text-decoration:none;margin:auto;">
-      <h6 class="card-subtitle mb-2 text-muted">{{blog.username}}</h6>
-    </a>
-    <p class="card-text">{{blog.post|truncatechars:150 | safe}}</p>
-    <a href="/view/blog/{{blog.id}}" class="card-link">Continue reading</a>
-  </div>
 </div>
 </div>
-{% endfor %}
-</div>
 
-
-
-
-
-
-
-
-
-
-
-
-</div>
+<style>
+.panel{
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) fixed;
+}
+p, label,a{
+  color:white;
+  font-size: 15px;
+}
+.panel-default{
+  border-color: inherit;
+}
+input,h3{
+  text-align: center;
+  color: white;
+}
+</style>
 {% endblock %}

@@ -104,7 +104,7 @@ def new_news(request):
     else:
         form = NewsForm()
 
-    return render(request,'news.html',{"form":form})
+    return render(request,'new_news.html',{"form":form})
 
 def search_results(request):
     if 'name' in request.GET and request.GET["name"]:
