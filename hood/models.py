@@ -62,6 +62,11 @@ class Business(models.Model):
     def __str__(self):
         return self.business_name
 
+    @classmethod
+    def search_by_name(cls,business):
+        business = Business.objects.filter(name__icontains = business)[0]
+        return cls.objects.filter(business_id = business.id)   
+
 class Health(models.Model):
     health_name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/', null=True)

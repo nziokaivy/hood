@@ -88,14 +88,12 @@ def new_news(request):
     return render(request,'news.html',{"form":form})
 
 def search_results(request):
-    if 'blog' in request.GET and request.GET["blog"]:
-        search_term = request.GET.get("blog")
-        searched_blogposts = BlogPost.search_blogpost(search_term)
-        message=f"{search_term}"
+    if 'name' in request.GET and request.GET["name"]:
+        business = request.GET.get("name")
+        searched_business = Business.search_by_business(business)
+        message=f"{business}"
 
-        print(searched_blogposts)
-
-        return render(request,'search.html',{"message":message,"blogs":searched_blogposts})
+        return render(request,'search.html',{"message":message,"news":searched_news})
 
     else:
         message="You haven't searched for any term"
