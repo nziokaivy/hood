@@ -11,3 +11,8 @@ class NewsForm(forms.ModelForm):
     class Meta:
         model=News
         exclude=['author','neighbourhood','post_date']
+
+class UpdatebioForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['username',]

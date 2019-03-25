@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Business, Profile, Neighbourhood, News, Health, Authorities
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm, NewsForm
+from .forms import ProfileForm, NewsForm, UpdatebioForm
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -40,6 +40,21 @@ def create_profile(request):
 
         form = ProfileForm()
     return render(request,'create_profile.html',{"form":form})
+
+def edit_profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = UpdatebioForm(request.POST, request.FILES, instance=current_user.profile)
+        print(form.is_valid())
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.user = current_user
+            image.save()
+        return redirect('home')
+
+    else:
+        form = UpdatebioForm()
+    return render(request, 'edit_profile.html', {"form": form})
 
 def businesses(request):
     current_user = request.user
