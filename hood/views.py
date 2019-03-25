@@ -56,6 +56,8 @@ def edit_profile(request):
         form = UpdatebioForm()
     return render(request, 'edit_profile.html', {"form": form})
 
+   
+
 def businesses(request):
     current_user = request.user
     business = Business.objects.order_by('-pub_date')
@@ -81,6 +83,8 @@ def news(request):
     news = News.objects.filter(neighbourhood_id=profile.neighbourhood)
 
     return render(request,'news.html',{"news":news})
+
+    
 
 def new_news(request):
     current_user=request.user
