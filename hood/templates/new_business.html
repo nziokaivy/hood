@@ -25,7 +25,7 @@
         <p>Please enter correct value</p>
       {% endif %}
 
-      <div class="panel panel-default" style="margin-top:150px;">
+      <div  style="margin-top:150px;">
 
         <div class="panel-body">
 
@@ -63,13 +63,23 @@
 p, label,a{
   color:white;
   font-size: 15px;
+  color:black;
 }
 .panel-default{
-  border-color: inherit;
+  border-color: transparent;
 }
 input,h3{
   text-align: center;
-  color: white;
+  color: black;
+
+
+}
+input[type=text] {
+    border-radius:40px;
+}
+
+textarea{
+    border-radius:40px;
 }
 </style>
 {% endblock %}

@@ -3,11 +3,13 @@
 {% load static %}
 
 {% block content %}
-<div class="w3-main w3-padding-large" style="margin-left:60%">
+{% include 'navbar.html' %}
 
 <style>
   body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </style>
+<div class="w3-main w3-padding-large" style="margin-left:40%">  
+
 <div class="container">
   <div class="row">
     <!-- Empty div -->
@@ -24,7 +26,7 @@
         <p>Please enter correct value</p>
       {% endif %}
 
-      <div class="panel panel-default" style="margin-top:150px;">
+      <div  style="margin-top:150px;">
 
         <div class="panel-body">
 
@@ -54,21 +56,29 @@
 
 </div>
 </div>
-
+</div>
 <style>
 .panel{
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) fixed;
 }
 p, label,a{
-  color:white;
+  color:black;
   font-size: 15px;
+  font-family: "Montserrat", sans-serif;
 }
 .panel-default{
-  border-color: inherit;
+  border-color: transparent;
 }
 input,h3{
   text-align: center;
-  color: white;
+  color: black;
+}
+input[type=text] {
+    border-radius:40px;
+}
+
+textarea{
+    border-radius:40px;
 }
 </style>
 {% endblock %}

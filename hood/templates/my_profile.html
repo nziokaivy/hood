@@ -41,7 +41,7 @@
       <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;"><strong>Email: </strong>{{ user.email }}</p>
       <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;"><strong>Bio: </strong> {{ profile.bio }}</p>
       <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;"><strong>Neighbourhood: </strong> {{ profile.neighbourhood}}</p>
-      <a href="{% url 'edit_profile' %}" class="button">Edit Profile</a>
+      <a href="{% url 'edit_profile' %}" class="btn btn-primary login-button">Edit Profile</a>
     </div>
     </div>
     <form  action="/accounts/register/" method="post">
@@ -57,14 +57,7 @@
     <br>
                       
                               
-  <h1 style="font-family: 'ABeeZee', sans-serif;;">My Images</h1>
-                      
-  {%for project in projects %}
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" id="photos">
-      <p style="font-family: 'ABeeZee', sans-serif;;">{{ project.poster }}</p>
-      <img src="{{ project.image.url }}" class="img-responsive"  alt="Image" style="width:100%; height:350px; padding-left:0px; padding-right:0px;" data-toggle="modal" data-target="#{{image.id}}">
-    </div> 
-  {%endfor%}
+  
     </div>
   {% endblock %}
   </div>

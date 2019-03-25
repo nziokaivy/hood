@@ -60,7 +60,8 @@ def edit_profile(request):
 
 def businesses(request):
     current_user = request.user
-    business = Business.objects.order_by('-pub_date')
+    profile=Profile.objects.get(username=current_user)
+    business = Business.objects.filter(neighbourhood_id=profile.neighbourhood)
     return render(request, 'business.html', {'business':business})
 
 def new_business(request):
@@ -80,7 +81,7 @@ def new_business(request):
     else:
         form = NewBusinessForm()
 
-    return render(request,'business_form.html',{"form":form})
+    return render(request,'new_business.html',{"form":form})
 
 def health(request):
     current_user=request.user
