@@ -15,6 +15,10 @@ class Neighbourhood(models.Model):
     def __str__(self):
         return self.name
 
+   
+    
+
+
     def save_neighbourhood(self):
         self.save()
 
@@ -69,6 +73,11 @@ class Business(models.Model):
 
     def save_business(self):
         self.save()  
+
+    
+    
+    def delete_comment(self):
+        Comments.objects.get(id = self.id).delete()  
 
 class Health(models.Model):
     health_name = models.CharField(max_length=100)
