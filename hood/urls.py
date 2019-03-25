@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^news',views.news, name='news'),
     url(r'^new_news$',views.new_news, name='new_news'),
     url(r'^search/',views.search_results, name='search_results'),
+    url(r'^new_business/',views.new_business, name='new_business'),
 ]     
 
 if settings.DEBUG:

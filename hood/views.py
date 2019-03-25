@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Business, Profile, Neighbourhood, News, Health, Authorities
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from .forms import ProfileForm, NewsForm, UpdatebioForm
+from .forms import ProfileForm, NewsForm, UpdatebioForm, NewBusinessForm
 from django.contrib.auth.models import User
 
 # Create your views here.
@@ -62,6 +62,27 @@ def businesses(request):
     current_user = request.user
     business = Business.objects.order_by('-pub_date')
     return render(request, 'business.html', {'business':business})
+
+def new_business(request):
+    current_user=request.user
+    profile =Profile.objects.get(username=current_user)
+
+    if request.method=="POST":
+        form =NewBusinessForm(request.POST,request.FILES)
+        if form.is_valid():
+            new_business = form.save(commit = False)
+            news_business.author = current_user
+            news_business.neighbourhood_id = profile.neighbourhood
+            business.save()
+
+        return HttpResponseRedirect('/business')
+
+
+    else:
+        form = NewBusinessForm()
+
+    return render(request,'new_business.html',{"form":form})
+
 
 def health(request):
     current_user=request.user

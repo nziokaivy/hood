@@ -3,8 +3,8 @@
 {% load static %}
 
 {% block content %}
-{% include "navbar.html" %}
-<div class="w3-main w3-padding-large" style="margin-left:40%">
+{% include 'navbar.html' %}
+<div class="w3-main w3-padding-large" style="margin-left:60%">
 
 <style>
   body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
@@ -19,7 +19,7 @@
 
 
     <div class="col-md-4 form-section">
-  
+      {{form.media}}
 
     {% if form.errors %}
         <p>Please enter correct value</p>
@@ -30,8 +30,8 @@
         <div class="panel-body">
 
           <div class="text-center">
-            <h3>Add news</h3>
-          <form action="{% url 'new_news' %}" method="post" enctype="multipart/form-data">
+            <h3>Add Business</h3>
+          <form action="{% url 'new_business' %}" method="post" enctype="multipart/form-data">
 
             {% csrf_token%}
             {% bootstrap_form form %}
