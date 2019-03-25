@@ -15,6 +15,26 @@ class Neighbourhood(models.Model):
     def __str__(self):
         return self.name
 
+    
+   def save_neighbourhood(self):
+       """
+       This is the function that we will use to save the instance of this class
+       """
+       self.save()
+
+   def delete_neighbourhood(self):
+       """
+       This is the function that we will use to delete the instance of this class
+       """
+       self.delete()
+    
+   def get_absolute_url(self): 
+        return reverse('home') 
+
+
+   def __str__(self):
+        return self.name    
+
    
     
 
@@ -36,6 +56,28 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save_news(self):
+        self.save()
+
+      
+    @classmethod
+    def get_by_id(cls, id):
+       news = News.objects.get(id = id)
+        return news
+
+    def delete_news(self):
+
+        self.delete()
+    
+    def __str__(self):
+        return self.title 
+    
+    @classmethod
+    def get_news(cls, id):
+        news = News.objects.filter(post_neighbourhood__pk =id)
+        return news
+    
 
 
 class Healthservices(models.Model):
@@ -65,6 +107,34 @@ class Business(models.Model):
 
     def __str__(self):
         return self.business_name
+
+     def save_business(self):
+        self.save()
+
+      
+    @classmethod
+    def get_by_id(cls, id):
+        business = Business.objects.get(id = id)
+        return profile
+
+    
+    def get_absolute_url(self): 
+        return reverse('business')
+
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def get_business(cls, id):
+        business = Business.objects.filter(neighbourhood__pk =id)
+        return business
+
+    @classmethod
+    def search_business(cls,name):
+        business = Business.objects.filter(name__icontains = name)
+        return business
+    def delete_business(self):
+       Business.objects.get(id = self.id).delete()    
 
     @classmethod
     def search_by_name(cls,business):
@@ -114,3 +184,26 @@ class Profile(models.Model):
 
     def save_profile(self):
         self.save()
+
+    
+
+    @classmethod
+    def get_by_id(cls, id):
+        profile = Profile.objects.get(user = id)
+        return profile
+
+    def filter_by_id(cls, id):
+        profile = Profile.objects.filter(user = id).first()
+        return profile
+
+    def get_absolute_url(self): 
+        return reverse('user_profile')
+    
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()    
