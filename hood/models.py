@@ -65,7 +65,10 @@ class Business(models.Model):
     @classmethod
     def search_by_name(cls,business):
         business = Business.objects.filter(name__icontains = business)[0]
-        return cls.objects.filter(business_id = business.id)   
+        return cls.objects.filter(business_id = business.id) 
+
+    def save_business(self):
+        self.save()  
 
 class Health(models.Model):
     health_name = models.CharField(max_length=100)

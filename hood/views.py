@@ -70,19 +70,17 @@ def new_business(request):
     if request.method=="POST":
         form =NewBusinessForm(request.POST,request.FILES)
         if form.is_valid():
-            new_business = form.save(commit = False)
-            news_business.author = current_user
-            news_business.neighbourhood_id = profile.neighbourhood
+            business = form.save(commit = False)
+            business.owner = current_user
+            business.neighbourhood = profile.neighbourhood
             business.save()
 
-        return HttpResponseRedirect('/business')
-
+        return HttpResponseRedirect('/businesses')
 
     else:
         form = NewBusinessForm()
 
-    return render(request,'new_business.html',{"form":form})
-
+    return render(request,'business_form.html',{"form":form})
 
 def health(request):
     current_user=request.user
