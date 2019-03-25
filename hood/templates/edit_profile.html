@@ -21,19 +21,20 @@
 {% include "base.html" %}
 {% include "navbar.html" %}
 
-<body style="font-family: 'ABeeZee', sans-serif;">
+<body style="font-family: 'Montserrat', sans-serif;">
+    <div class="w3-main w3-padding-large" style="margin-left:40%">
 <div class="container" style="background-color:#fff;">
   <br>
-<h1 style="font-family: 'ABeeZee', sans-serif; margin-right:0px;">Edit Profile Information</h1>
+<h1 style="font-family: 'Montserrat', sans-serif; margin-right:0px;">Edit Profile Information</h1>
 
      <div class="row">
 
   <br>
-  <form  action="{%url 'create_profile'%}" method="post" enctype="multipart/form-data" style="font-family: 'ABeeZee', sans-serif;">
+  <form  action="{%url 'create_profile'%}" method="post" enctype="multipart/form-data" style="font-family: 'Montserrat', sans-serif;">
     {%csrf_token%}
 
     {% bootstrap_form form%}
-    <input id="id_myfield" type="submit" class="btn btn-info btn-lg" value="Post" style="font-family: 'ABeeZee', sans-serif;">
+    <input id="id_myfield" type="submit" class="btn btn-info btn-lg" value="Post" style="font-family: 'Montserrat', sans-serif;">
   </form>
 
    {% block scripts %}
@@ -44,6 +45,8 @@
 
      </div>
 </div>
+<div class="w3-main w3-padding-large" style="margin-left:60%">
+
 
 
 
