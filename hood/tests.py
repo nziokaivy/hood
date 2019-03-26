@@ -7,7 +7,7 @@ from django.urls import reverse
 
 # Create your tests here.
 
-class neighbourhoodTestClass(TestCase):
+class NeighbourhoodTestClass(TestCase):
 
     def setUp(self):
         self.new_neighbourhood = Neighbourhood(name = "runda", neighbourhood_count="13")
@@ -40,7 +40,7 @@ class ProfileTestClass(TestCase):
 
     def setUp(self):
         user = User(username='abbyshabi')
-        self.profile = Profile(profile_image='yes we can', bio='very awesome', user=user)
+        self.profile = Profile( bio='very awesome', user=user)
 
     def tearDown(self):
         User.objects.all().delete()

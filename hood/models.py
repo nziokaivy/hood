@@ -6,6 +6,7 @@ from django.db.models import Q
 import datetime as dt
 
 
+
 # Create your models here.
 class Neighbourhood(models.Model):
     name = models.CharField(max_length=100, null = True)
@@ -16,23 +17,23 @@ class Neighbourhood(models.Model):
         return self.name
 
     
-   def save_neighbourhood(self):
+    def save_neighbourhood(self):
        """
        This is the function that we will use to save the instance of this class
        """
        self.save()
 
-   def delete_neighbourhood(self):
+    def delete_neighbourhood(self):
        """
        This is the function that we will use to delete the instance of this class
        """
        self.delete()
     
-   def get_absolute_url(self): 
+    def get_absolute_url(self): 
         return reverse('home') 
 
 
-   def __str__(self):
+    def __str__(self):
         return self.name    
 
    
@@ -64,7 +65,7 @@ class News(models.Model):
     @classmethod
     def get_by_id(cls, id):
        news = News.objects.get(id = id)
-        return news
+       return news
 
     def delete_news(self):
 
@@ -108,7 +109,7 @@ class Business(models.Model):
     def __str__(self):
         return self.business_name
 
-     def save_business(self):
+    def save_business(self):
         self.save()
 
       
@@ -198,12 +199,4 @@ class Profile(models.Model):
 
     def get_absolute_url(self): 
         return reverse('user_profile')
-    
-    @receiver(post_save, sender=User)
-    def update_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()    
+ 
